@@ -38,7 +38,7 @@ const PhoneNumberChecklist: React.FC<PhoneNumberChecklistProps> = ({
   return (
     <Card className="flex items-center justify-between p-4">
       <div className="flex flex-col">
-        <span className="text-sm text-gray-500">Number</span>
+        <span className="text-sm text-gray-500">Twilio Phone Number</span>
         <div className="flex items-center">
           <span className="font-medium w-36">
             {isVisible ? phoneNumber || "None" : "••••••••••"}

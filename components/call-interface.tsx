@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import TopBar from "@/components/top-bar";
-import SessionConfigurationPanel from "@/components/session-configuration-panel";
 import Transcript from "@/components/transcript";
-import FunctionCallsPanel from "@/components/function-calls-panel";
 import { Item } from "@/components/types";
 import handleRealtimeEvent from "@/lib/handle-realtime-event";
 import PhoneNumberChecklist from "@/components/phone-number-checklist";
@@ -57,38 +55,16 @@ const CallInterface = () => {
     <div className="h-screen bg-white flex flex-col">
       <TopBar />
       <div className="flex-grow p-4 h-full overflow-hidden flex flex-col">
-        <div className="grid grid-cols-12 gap-4 h-full">
-          {/* Left Column */}
-          <div className="col-span-3 flex flex-col h-full overflow-hidden">
-            <SessionConfigurationPanel
-              callStatus={callStatus}
-              onSave={(config) => {
-                if (ws && ws.readyState === WebSocket.OPEN) {
-                  const updateEvent = {
-                    type: "session.update",
-                    session: {
-                      ...config,
-                    },
-                  };
-                  console.log("Sending update event:", updateEvent);
-                  ws.send(JSON.stringify(updateEvent));
-                }
-              }}
-            />
-          </div>
+        <div className="flex justify-center items-center">
 
           {/* Middle Column: Transcript */}
-          <div className="col-span-6 flex flex-col gap-4 h-full overflow-hidden">
+          <div className="w-full flex flex-col gap-4 h-full overflow-hidden max-w-[1000px]">
             <PhoneNumberChecklist
               selectedPhoneNumber={selectedPhoneNumber}
             />
             <Transcript items={items} />
           </div>
 
-          {/* Right Column: Function Calls */}
-          <div className="col-span-3 flex flex-col h-full overflow-hidden">
-            <FunctionCallsPanel items={items} ws={ws} />
-          </div>
         </div>
       </div>
     </div>
